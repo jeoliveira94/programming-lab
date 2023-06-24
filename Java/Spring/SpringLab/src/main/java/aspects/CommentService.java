@@ -1,5 +1,6 @@
 package aspects;
 
+import org.aspectj.lang.annotation.AfterReturning;
 import org.springframework.stereotype.Service;
 
 import java.util.logging.Logger;
@@ -11,6 +12,11 @@ public class CommentService {
     @ToLog
     public String publishComment(Comment comment){
         logger.info("Publishing comment: " + comment.getText());
-        return "SUCCESS";
+        return "PUBLISHED";
+    }
+
+    public String deleteComment(Comment comment) {
+        logger.info("Deleting comment: " + comment.getText());
+        return "DELETED";
     }
 }

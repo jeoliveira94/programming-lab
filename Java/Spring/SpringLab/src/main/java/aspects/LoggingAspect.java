@@ -1,6 +1,7 @@
 package aspects;
 
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
@@ -29,5 +30,11 @@ public class LoggingAspect {
         logger.info("Method executed and returns: " + returnedByMethod);
 
         return "Changed by aspect";
+    }
+
+    @AfterReturning(value = "(execution(* CommentService.deleteComment(..)))", returning = "returnedValue")
+    public Object logAfter(Object returnedValue) {
+        logger.info("Method executed and returns: " + returnedValue);
+        return returnedValue;
     }
 }
