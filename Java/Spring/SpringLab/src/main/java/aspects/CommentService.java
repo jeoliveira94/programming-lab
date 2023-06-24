@@ -19,4 +19,9 @@ public class CommentService {
         logger.info("Deleting comment: " + comment.getText());
         return "DELETED";
     }
+
+    public String updateComment(Comment comment) throws Exception {
+        logger.info("Updating comment: " + comment.getText());
+        throw new Exception("Failed to update comment: " + comment.getText());
+    }
 }

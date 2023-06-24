@@ -16,7 +16,10 @@ public class Main {
         comment.setText("Learning about Aspects!!!");
 
         var commentService = context.getBean(CommentService.class);
-        Object returnedByMethod = commentService.deleteComment(comment);
-        logger.info("Returned by method in main: " + returnedByMethod);
+        try {
+            commentService.updateComment(comment);
+        } catch (Exception e) {
+            logger.severe(e.toString());
+        }
     }
 }

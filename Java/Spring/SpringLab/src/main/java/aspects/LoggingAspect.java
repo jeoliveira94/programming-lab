@@ -1,7 +1,9 @@
 package aspects;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
@@ -36,5 +38,10 @@ public class LoggingAspect {
     public Object logAfter(Object returnedValue) {
         logger.info("Method executed and returns: " + returnedValue);
         return returnedValue;
+    }
+
+    @AfterThrowing(pointcut = "(execution(* CommentService.updateComment(..)))", throwing = "exception")
+    public void logAfterThrowing(JoinPoint joinPoint, Exception exception) {
+        logger.severe("Method " + joinPoint.getSignature().getName() + " throws an exception " + exception.getMessage());
     }
 }
