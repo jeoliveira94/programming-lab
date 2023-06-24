@@ -14,7 +14,7 @@ public class LoggingAspect {
 
     private static final Logger logger = Logger.getLogger(LoggingAspect.class.getName());
 
-    @Around("execution(* aspects.*.*(..))")
+    @Around("@annotation(ToLog)")
     public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
         logger.info("Method will execute");
 
