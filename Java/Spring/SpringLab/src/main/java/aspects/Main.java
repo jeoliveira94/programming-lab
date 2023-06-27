@@ -17,7 +17,7 @@ public class Main {
 
         var commentService = context.getBean(CommentService.class);
         try {
-            commentService.updateComment(comment);
+            commentService.publishComment(comment);
         } catch (Exception e) {
             logger.severe(e.toString());
         }
