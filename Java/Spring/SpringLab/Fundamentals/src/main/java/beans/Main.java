@@ -3,6 +3,7 @@ package beans;
 import beans.models.Person;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.util.function.Supplier;
 import java.util.logging.Logger;
 
 public class Main {
@@ -20,5 +21,14 @@ public class Main {
 
         Person person = context.getBean(Person.class);
         logger.info(person.getName());
+
+        Turtle turtle = new Turtle();
+        turtle.setName("Pedro");
+
+        Supplier<Turtle> supplier = () -> turtle;
+        context.registerBean("turtle", Turtle.class, supplier);
+
+        Turtle turtleBean = context.getBean(Turtle.class);
+        logger.info(turtleBean.getName());
     }
 }
