@@ -1,5 +1,6 @@
 package beans;
 
+import beans.models.Person;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.logging.Logger;
@@ -16,5 +17,8 @@ public class Main {
 
         logger.info(parrot1.getName());
         logger.info(parrot2.getName());
+
+        Person person = context.getBean(Person.class);
+        logger.info(person.getName());
     }
 }
