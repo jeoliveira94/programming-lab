@@ -11,7 +11,10 @@ public class Main {
 
         var context = new AnnotationConfigApplicationContext(ProjectConfig.class);
 
-        Parrot parrot = context.getBean(Parrot.class);
-        logger.info(parrot.getName());
+        Parrot parrot1 = context.getBean("parrot1", Parrot.class);
+        Parrot parrot2 = context.getBean("parrot2", Parrot.class);
+
+        logger.info(parrot1.getName());
+        logger.info(parrot2.getName());
     }
 }
