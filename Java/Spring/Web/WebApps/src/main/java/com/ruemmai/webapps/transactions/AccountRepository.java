@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class AccountRepository {
@@ -19,9 +20,9 @@ public class AccountRepository {
         return jdbc.query(sql, new AccountRowMapper());
     }
 
-    public Account findAccountById(long id) {
+    public Optional<Account> findAccountById(long id) {
         String sql = "SELECT * FROM account WHERE id = ?";
-        return jdbc.queryForObject(sql, new AccountRowMapper(), id);
+        return Optional.ofNullable(jdbc.queryForObject(sql, new AccountRowMapper(), id));
     }
 
     public void changeAmount(long id, BigDecimal amount) {

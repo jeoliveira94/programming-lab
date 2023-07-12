@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.security.auth.login.AccountNotFoundException;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TransferService {
@@ -16,9 +18,9 @@ public class TransferService {
     }
 
     @Transactional
-    public void transferMoney(long idSender, long idReceiver, BigDecimal amount) {
-        Account sender = accountRepository.findAccountById(idSender);
-        Account receiver = accountRepository.findAccountById(idReceiver);
+    public void transferMoney(long idSender, long idReceiver, BigDecimal amount) throws AccountNotFoundException {
+        Account sender = accountRepository.findAccountById(idSender).orElseThrow(AccountNotFoundException::new);
+        Account receiver = accountRepository.findAccountById(idReceiver).orElseThrow(AccountNotFoundException::new);
 
         BigDecimal senderNewAmount = sender.getAmount().subtract(amount);
         BigDecimal receiverNewAmount = receiver.getAmount().add(amount);
